@@ -1,7 +1,9 @@
 import os
 import random
 
-# @TODO Import your Ingestor and MemeEngine classes
+from QuoteEngine import Importer
+from QuoteEngine import QuoteModel
+from MemeEngine import MemeEngine
 
 
 def generate_meme(path=None, body=None, author=None):
@@ -17,7 +19,7 @@ def generate_meme(path=None, body=None, author=None):
 
         img = random.choice(imgs)
     else:
-        img = path[0]
+        img = path
 
     if body is None:
         quote_files = ['./_data/DogQuotes/DogQuotesTXT.txt',
@@ -26,7 +28,7 @@ def generate_meme(path=None, body=None, author=None):
                        './_data/DogQuotes/DogQuotesCSV.csv']
         quotes = []
         for f in quote_files:
-            quotes.extend(Ingestor.parse(f))
+            quotes.extend(Importer.parse(f))
 
         quote = random.choice(quotes)
     else:
@@ -40,9 +42,25 @@ def generate_meme(path=None, body=None, author=None):
 
 
 if __name__ == "__main__":
-    # @TODO Use ArgumentParser to parse the following CLI arguments
     # path - path to an image file
     # body - quote body to add to the image
     # author - quote author to add to the image
-    args = None
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--path", type=str,
+                        help="path to an image file")
+    parser.add_argument("--body", type=str,
+                        help="body - quote body to add to the image")
+    parser.add_argument("--author", type=str,
+                        help=" quote author to add to the image")
+
+    args = parser.parse_args()
+
+    if not os.path.exists("./tmp"):
+        os.makedirs("./tmp")
+
     print(generate_meme(args.path, args.body, args.author))
+
+
+
