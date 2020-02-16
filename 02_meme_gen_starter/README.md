@@ -89,3 +89,21 @@ Take a moment to ensure your submission is ready for review:
 1. You have reviewed each item in the rubric and verified you have completed it successfully.
 2. The requirements.txt file contains all required dependencies. (TIP: delete your virtual environment and re-instantiate to verify it is complete)
 3. You have pushed all changes to your github repo on the master branch.
+
+## Instructions to execute the project
+
+You can run ``meme.py`` to generate a meme, for example:
+```
+# to print all possible instructions
+python meme.py -h
+
+# to generate a meme with a random quote:
+python meme-py --path path_to_image --body "hola, que ase?" --author "populacho"
+```
+
+Or you can run a web interface to consume the service. To launch the server you need to execute:
+```
+source activate your_env
+export FLASK_APP=app.py
+flask run --host 0.0.0.0 --port 3000 --reload
+```

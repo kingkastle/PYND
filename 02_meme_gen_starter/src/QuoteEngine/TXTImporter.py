@@ -1,4 +1,3 @@
-import pandas
 from typing import List
 
 from .ImportInterface import ImportInterface
